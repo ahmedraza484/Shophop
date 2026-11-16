@@ -1,29 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { MdOutlineMenuOpen } from "react-icons/md";
+import { MdOutlineShoppingCart } from "react-icons/md";
+
 
 const Navbar = () => {
+  const [menu, setMenu] = useState(false);
+  
   return (
     <>
       <header>
-        <nav>
-          <div className="logo">
-            <p>LOGO</p>
-          </div>
-          <ul>
+        <nav className="navbar">
+          <div className="logo">{/* <img>LOGO</img> */}</div>
+          <ul className={`navbar-list ${menu ? "active" : ""}`}>
             <li>
-              <Link>HOME</Link>
+              <Link to="/">Home</Link>
             </li>
             <li>
-              <Link>SHOP</Link>
+              <Link to="/shop">Shop</Link>
             </li>
             <li>
-              <Link>ABOUT US</Link>
+              <Link to="/blog">Blog</Link>
             </li>
             <li>
-              <Link>CONTACT US</Link>
+              <Link to="/about">About</Link>
             </li>
-            <p>MENU ICONS</p>
+            <li>
+              <Link to="/contact">Contact</Link>
+            </li>
+            <li>
+              <Link to="/cart">
+                <MdOutlineShoppingCart />
+              </Link>
+            </li>
           </ul>
+          <button className="menu-btn" onClick={() => setMenu(!menu)}>
+            <MdOutlineMenuOpen />
+          </button>
         </nav>
       </header>
     </>
