@@ -1,8 +1,11 @@
 import { FaStar } from "react-icons/fa";
 import { FaStarHalfAlt } from "react-icons/fa";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import { useCart } from "../Context/CartContext";
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useCart();
+
   return (
     <>
       <div className="box-content">
@@ -18,7 +21,7 @@ const ProductCard = ({ product }) => {
           </div>
           <h4>$ {product.price}</h4>
         </div>
-        <div className="cart-icon">
+        <div className="cart-icon" onClick={()=>addToCart(product)}>
           <MdOutlineShoppingCart />
         </div>
       </div>

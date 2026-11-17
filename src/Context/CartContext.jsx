@@ -1,0 +1,36 @@
+import { createContext, useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+
+const CartContext = createContext();
+
+export const CartProvider = ({ children }) => {
+  // const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = (product) => {
+    setCart((prev) => {
+      const existing = prev.find((item) => item.id === product.id);
+      if (existing) {
+        toast.success("Cart Quantity Increased");
+        return prev.map((item) =>
+          item.id === product.id ? { ...item, qty: item.qty + 1 } : item,
+        );
+      }
+      toast.success("Cart Added Successfully!");
+      return [...prev, { ...product, qty: 1 }];
+    });
+  };
+
+  return (
+    <CartContext.Provider value={{ cart, setCart, addToCart }}>
+      {children}
+    </CartContext.Provider>
+  );
+};
+export const useCart = () => useContext(CartContext);

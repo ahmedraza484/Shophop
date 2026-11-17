@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdOutlineMenuOpen } from "react-icons/md";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import logo from '../assets/logo.png'
-
+import { MdOutlineShoppingBag } from "react-icons/md";
+import logo from "../assets/logo.png";
+import { useCart } from "../Context/CartContext";
 
 const Navbar = () => {
+  const { cart } = useCart();
+  const cartCount = cart.reduce(
+  (total, item) => total + item.qty,
+  0
+);
   const [menu, setMenu] = useState(false);
-  
+
   return (
     <>
       <header>
@@ -22,19 +27,18 @@ const Navbar = () => {
             <li>
               <Link to="/shop">Shop</Link>
             </li>
-            <li>
-              <Link to="/blog">Blog</Link>
-            </li>
+
             <li>
               <Link to="/about">About</Link>
             </li>
             <li>
               <Link to="/contact">Contact</Link>
             </li>
-            <li>
+            <li className="cart-icon">
               <Link to="/cart">
-                <MdOutlineShoppingCart />
+                <MdOutlineShoppingBag />
               </Link>
+              <span>{cartCount}</span>
             </li>
           </ul>
           <button className="menu-btn" onClick={() => setMenu(!menu)}>
