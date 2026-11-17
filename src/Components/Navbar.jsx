@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdOutlineMenuOpen } from "react-icons/md";
 import { MdOutlineShoppingCart } from "react-icons/md";
+import logo from '../assets/logo.png'
 
 
 const Navbar = () => {
@@ -11,7 +12,9 @@ const Navbar = () => {
     <>
       <header>
         <nav className="navbar">
-          <div className="logo">{/* <img>LOGO</img> */}</div>
+          <div className="logo">
+            <img src={logo} alt="" />
+          </div>
           <ul className={`navbar-list ${menu ? "active" : ""}`}>
             <li>
               <Link to="/">Home</Link>
