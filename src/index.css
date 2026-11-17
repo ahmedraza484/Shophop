@@ -291,6 +291,10 @@ header {
 }
 
 @media (max-width: 480px) {
+  .shop-section h2{
+    font-size: 30px;
+    text-align: center;
+  }
   .shop-section {
     padding: 0 15px;
   }
